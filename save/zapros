@@ -1,0 +1,72 @@
+В работе секции questdb файла routes.py есть функция get_terminal_output(),
+которая возвращает вывод терминала. Также есть функция get_data(),
+и terminal_output.py и questdb.py. В соответствующих обертках.
+Надо построить на том же принципе и работу секции rethinkdb так, чтобы ее
+шаблон был аналогичен шаблону questdb.html. Это даст возможность выводить
+с авто-обновлением таблицы в шаблоне.
+Вот как выглядит аналогичный шаблон и часть routes.py для questdb -> 
+
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2 class="header-title">QuestDB</h2>
+    <p>Working with QuestDB.</p>
+    <div>
+        <h3>Terminal Output</h3>
+        <pre id="terminal-output">{{ terminal_output }}</pre>
+    </div>
+    <div class="graph-container">      
+            <img id="data-plot" src="{{ url_for('main.plot_png') }}" alt="Data Plot">        
+    </div>
+</div>
+
+
+<script>
+    function updateData() {
+        // Update terminal output
+        fetch("{{ url_for('main.terminal_output') }}")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('terminal-output').innerText = data;
+            });
+
+        // Update plot
+        document.getElementById('data-plot').src = "{{ url_for('main.plot_png') }}" + "?t=" + new Date().getTime();
+    }
+
+    // Update data every 5 seconds
+    setInterval(updateData, 5000);
+</script>
+{% endblock %}
+
+
+def get_terminal_output():
+    data = get_data()
+            
+    output = []
+    header = "{:<8} {:<8} {:<8} {:<8} {:<8} {:<8} {:<8} {:<8} {:<30}".format(
+        "ROW_num", "DHT_T", "DHT_H", "BME_T", "BME_H", "BME_P", "DS_T1", "DS_T2", "Timestamp"
+    )
+    separator = "-------- " * 8 + "------------------------------"
+    output.append(separator)
+    output.append(f"total_rows {len(data)}")
+
+    output.append(separator)
+    for i, row in enumerate(data):
+        output.append("{:<8} {:<8} {:<8} {:<8} {:<8} {:<8} {:<8} {:<8} {:<30}".format(
+            i, row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7]
+        ))
+    output.append(separator)
+    output.append(header)
+    output.append(separator)
+    return "\n".join(output)
+
+@bp.route('/terminal_output')
+def terminal_output():
+    return get_terminal_output()
+
+@bp.route('/questdb')
+def questdb():
+    terminal_output = get_terminal_output()
+    return render_template('questdb.html', title='Working with QuestDB', terminal_output=terminal_output)

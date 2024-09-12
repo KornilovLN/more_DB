@@ -1,0 +1,49 @@
+    """
+    # Создание Dash-приложения
+    from dash import Dash, rdcc, html
+    import plotly.express as px
+    import pandas as pd
+    from .routes import get_data
+
+    dash_app = Dash(__name__, server=app, url_base_pathname='/dash_questdb/')
+
+    dash_app.layout = html.Div([
+        html.H1(children='Weather Sensor Data', style={'textAlign': 'center'}),
+        dcc.Interval(
+            id='interval-component',
+            interval=5*1000,  # обновление каждые 5 секунд
+            n_intervals=0
+        ),
+        dcc.Graph(id='temperature-graph'),
+        dcc.Graph(id='humidity-graph'),
+        dcc.Graph(id='pressure-graph')
+    ])
+
+    @dash_app.callback(
+        Output('temperature-graph', 'figure'),
+        Output('humidity-graph', 'figure'),
+        Output('pressure-graph', 'figure'),
+        Input('interval-component', 'n_intervals')
+    )
+    def update_graph(n):
+        data = get_data()
+        if data:
+            df = pd.DataFrame(data, columns=[
+                'DHT_Temperature', 'DHT_Humidity',
+                'BME_Temperature', 'BME_Humidity', 'BME_Pressure',
+                'DS_Temperature1', 'DS_Temperature2', 'timestamp'
+            ])
+            df['timestamp'] = pd.to_datetime(df['timestamp'])
+            
+            # График температуры
+            fig_temp = px.line(df, x='timestamp', y=['DHT_Temperature', 'BME_Temperature', 'DS_Temperature1', 'DS_Temperature2'], title='Temperature Data')
+            
+            # График влажности
+            fig_humidity = px.line(df, x='timestamp', y=['DHT_Humidity', 'BME_Humidity'], title='Humidity Data')
+            
+            # График давления
+            fig_pressure = px.line(df, x='timestamp', y='BME_Pressure', title='Pressure Data')
+            
+            return fig_temp, fig_humidity, fig_pressure
+        return {}, {}, {}
+    """

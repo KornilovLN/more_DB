@@ -1,0 +1,181 @@
+/* Стили для подложки под всем сайтом */
+body {
+    background-color: #e0e0d0; /* Светло-серый цвет */
+}
+
+/* Стили для контейнера центральной части */
+.central-container {
+    width: 95%;     /* Устанавливаем ширину 95% */
+    margin: 0 auto; /* Центрируем контейнер */
+}
+
+/* Стили для центральной части */
+.main-content {
+    background-color: #d3e0ea; /* Светло-голубой с серым оттенком */
+    color: #8773b6; /* текст */
+    padding: 20px; /* Отступы */
+    border-radius: 5px; /* Скругленные углы */
+}
+
+.main-span-content {
+    color: #614e8d; /* текст */
+}
+
+/* Стили для header */
+.header {
+    background-color: #98b8e2; /* Светлый с серым оттенком */
+    color: #fff; /* Белый текст */
+    padding: 20px; /* Отступы */
+    border-radius: 5px; /* Скругленные углы */
+}
+
+/* Стили для footer */
+.footer {
+    background-color: #a8d5ba; /* Светло-зеленый с серым оттенком */
+    color: #fff; /* Белый текст */
+    padding: 20px; /* Отступы */
+    border-radius: 5px; /* Скругленные углы */
+}
+
+/* Стили для sidebar */
+.sidebar {
+    background-color: #c7caaa; /* зеленоватый */
+    color: #fff; /* Белый текст */
+    padding: 20px; /* Отступы */
+    border-radius: 5px; /* Скругленные углы */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.35);
+}
+
+/* Стили для заголовков */
+.header-title {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Тень для текста */
+}
+
+/* Стиль для логотипа */
+.logo {
+    height: 100%;
+    /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);*/
+}
+
+.about-content {
+    max-width: 600px;
+    margin: 30px auto; /* Увеличили верхний и нижний отступ для "приподнятия" */
+    padding: 25px; /* Увеличили внутренний отступ */
+    background-color: #e6e9f0; /* Немного светлее, чтобы текст был более читаемым */
+    border-radius: 8px; /* Увеличили скругление углов */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2); /* Усилили тень и сместили вниз */
+    position: relative; /* Для создания эффекта "приподнятости" */
+    top: -5px; /* Слегка приподнимаем блок */
+    transition: all 0.3s ease; /* Добавляем плавное изменение при наведении */
+}
+
+.about-content:hover {
+    top: -8px; /* При наведении приподнимаем еще выше */
+    box-shadow: 0 15px 30px rgba(0,0,0,0.25); /* Усиливаем тень при наведении */
+}
+
+.about-separator {
+    font-weight: bold;
+    color: #4a0e78; /* Темно-фиолетовый цвет */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1); /* Добавляем легкую тень тексту */
+}
+
+.about-author {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: #3c096c; /* Темно-фиолетовый цвет */
+    font-weight: 600; /* Делаем шрифт чуть жирнее */
+}
+
+.about-info {
+    margin: 8px 0;
+    color: #240046; /* Темно-фиолетовый цвет для обычного текста */
+    line-height: 1.6; /* Увеличиваем межстрочный интервал для лучшей читаемости */
+}
+
+
+.requirements-info {
+    margin: 15px 0;
+}
+
+.requirements-info p {
+    margin: 5px 0;
+    font-family: monospace;
+    font-size: 14px;
+}
+
+
+.requirements-content {
+    text-align: left;
+}
+
+.requirements-content p {
+    margin: 5px 0;
+    font-family: monospace;
+    font-size: 14px;
+}
+
+.header-title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#version-info p {
+    margin: 5px 0;
+}
+
+.header-title {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #4a0e78; /* Темно-фиолетовый цвет */
+    font-size: 2.5rem; /* Увеличенный размер шрифта */
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.requirements-content {
+    text-align: left;
+    color: #240046; /* Темно-фиолетовый цвет для основного текста */
+}
+
+.requirements-content p {
+    margin: 8px 0;
+    font-family: monospace;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+#version-info p {
+    margin: 8px 0;
+    color: #3c096c; /* Немного светлее фиолетовый для версий */
+}
+
+.about-content {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 25px;
+    background-color: #e6e9f0;
+    border-radius: 8px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    position: relative;
+    top: -5px;
+    transition: all 0.3s ease;
+}
+
+.about-content:hover {
+    top: -8px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+}
+
+.about-info {
+    color: #240046; /* Темно-фиолетовый цвет */
+    font-weight: 500; /* Немного жирнее */
+}
+
+
+
+
+
+
+
+

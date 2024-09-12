@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2 class="header-title">Requirements of Application</h2>
+    <div class="about-content requirements-content">
+        <p class="about-info">Версии используемых библиотек и фреймворков:</p>
+        <div class="about-info" id="version-info"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var versionInfo = `
+        <p>* jQuery v${$.fn.jquery}</p>
+        <p>* Bootstrap v${$.fn.tooltip.Constructor.VERSION}</p>
+        <p>* Python v${'{{ python_version }}'}</p>
+        <p>* pip v${'{{ pip_version }}'}</p>
+        <p>* Flask v${'{{ flask_version }}'}</p>
+        <p>* Library: pandas, numpy, matplotlib, ...</p>
+    `;
+    document.getElementById('version-info').innerHTML = versionInfo;
+});
+</script>
+{% endblock %}
+
+

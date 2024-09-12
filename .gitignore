@@ -1,0 +1,5 @@
+add_commit_push.sh
+books/
+__pycache__/
+venv/
+

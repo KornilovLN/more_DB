@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2 class="header-title">Requirements of Application</h2>
+    <div class="text-left">
+        <span class="main-span-content" id="version-info"></span>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Например, можно проверить версии jQuery и Bootstrap:
+        console.log('jQuery v' + $.fn.jquery);
+        console.log('Bootstrap v' + $.fn.tooltip.Constructor.VERSION);
+
+        // и вывести версию в HTML footer раздел
+        var versionInfo = `
+            * jQuery v${$.fn.jquery}<br>
+            * Bootstrap v${$.fn.tooltip.Constructor.VERSION}<br>
+            * Python v${'{{ python_version }}'}<br>
+            * pip v${'{{ pip_version }}'}<br>
+            * Flask v${'{{ flask_version }}'}<br>
+            * Library: pandas, numpy, mathplotlib,...<br>
+        `;
+        document.getElementById('version-info').innerHTML = versionInfo;
+    });
+</script>
+{% endblock %}

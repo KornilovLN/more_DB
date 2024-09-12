@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2 class="header-title">RethinkDB Data</h2>
+    <table class="table table-striped" id="rethinkdb-table">
+        <thead>
+            <tr>
+                <th>Region</th>
+                <th>Post</th>
+                <th>BME-T</th>
+                <th>BME-H</th>
+                <th>BME-P</th>
+                <th>DS-T1</th>
+                <th>DS-T2</th>
+                <th>DS-T3</th>
+                <th>DHT-T</th>
+                <th>DHT-H</th>
+                <th>Timestamp</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in data %}
+            <tr>
+                <td>{{ row.region }}</td>
+                <td>{{ row.post }}</td>
+                <td>{{ row.bme_t | round(2) }}</td>
+                <td>{{ row.bme_h | round(2) }}</td>
+                <td>{{ row.bme_p | round(2) }}</td>
+                <td>{{ row.ds_t1 | round(2) }}</td>
+                <td>{{ row.ds_t2 | round(2) }}</td>
+                <td>{{ row.ds_t3 | round(2) }}</td>
+                <td>{{ row.dht_t | round(2) }}</td>
+                <td>{{ row.dht_h | round(2) }}</td>
+                <td>{{ row.timestamp }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<script>
+function updateData() {
+    fetch('/rethinkdb')
+        .then(response => response.json())
+        .then(data => {
+            const tableBody = document.querySelector('#rethinkdb-table tbody');
+            tableBody.innerHTML = '';
+            data.forEach(row => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${row.region}</td>
+                    <td>${row.post}</td>
+                    <td>${row.bme_t.toFixed(2)}</td>
+                    <td>${row.bme_h.toFixed(2)}</td>
+                    <td>${row.bme_p.toFixed(2)}</td>
+                    <td>${row.ds_t1.toFixed(2)}</td>
+                    <td>${row.ds_t2.toFixed(2)}</td>
+                    <td>${row.ds_t3.toFixed(2)}</td>
+                    <td>${row.dht_t.toFixed(2)}</td>
+                    <td>${row.dht_h.toFixed(2)}</td>
+                    <td>${row.timestamp}</td>
+                `;
+                tableBody.appendChild(tr);
+            });
+        });
+}
+
+setInterval(updateData, 5000); // Обновляем данные каждые 5 секунд
+</script>
+{% endblock %}

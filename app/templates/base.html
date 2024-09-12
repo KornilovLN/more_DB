@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>My Flask App</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        .graph-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        .graph-container img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Верхняя шапка -->
+    <!-- <header class="header py-3 bg-success text-white text-center"> -->
+    <header class="header text-right">    
+        <div class="container">
+            <div class="row align-items-center  header-title">
+                <div class="col-md-1">
+                    <img src="{{ url_for('static', filename='logo_big_2.png') }}" alt="Company Logo" class="logo">
+                </div>
+                <div class="col-md-10">
+                    <h1 class="header-title">App > DB > App</h1>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <!-- Центральная часть -->
+    <main class="central-container my-4">
+        <div class="row">
+            <!-- Боковая панель -->
+            <aside class="col-md-2 sidebar p-3">
+                <h4  class="header-title">Main MENU</h4>
+                <ul class="nav flex-column">
+                    <!-- Группа пунктов меню Authentication с подменю -->
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-outline-primary mb-2" data-toggle="collapse" href="#authSubmenu" role="button" aria-expanded="false" aria-controls="authSubmenu">
+                            Authentication
+                        </a>
+                        <div class="collapse" id="authSubmenu">
+                            <ul class="nav flex-column ml-3">
+                                <li class="nav-item">
+                                    <a class="nav-link btn btn-outline-primary mb-2" href="{{ url_for('main.login') }}">Login</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link btn btn-outline-primary mb-2" href="{{ url_for('main.register') }}">Register</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link btn btn-outline-primary mb-2" href="{{ url_for('main.logout') }}">Logout</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <!-- Пункт меню описания работы приложения с различными БД -->
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-outline-primary mb-2" href="{{ url_for('main.description') }}">Description App</a>
+                    </li>
+
+                    <!-- Пункт меню About -->
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-outline-primary mb-2" href="{{ url_for('main.about') }}">About</a>
+                    </li>
+
+                    <!-- Группа пунктов меню -->
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-outline-primary mb-2" data-toggle="collapse" href="#groupSubmenu" role="button" aria-expanded="false" aria-controls="groupSubmenu">
+                            DB variants
+                        </a>
+                        <div class="collapse" id="groupSubmenu">
+                            <ul class="nav flex-column ml-3">
+                                <li class="nav-item">
+                                    <a class="nav-link btn btn-outline-primary mb-2" href="{{ url_for('main.postgresql') }}">Postgresql</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link btn btn-outline-primary mb-2" href="{{ url_for('main.sqlite') }}">SQLite</a>
+                                </li>                                
+                                <li class="nav-item">
+                                    <a class="nav-link btn btn-outline-primary mb-2" href="{{ url_for('main.timescaledb') }}">TimescaleDB</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link btn btn-outline-primary mb-2" href="{{ url_for('main.mongodb') }}">MongoDB</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link btn btn-outline-primary mb-2" href="{{ url_for('main.redis') }}">Redis</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link btn btn-outline-primary mb-2" href="{{ url_for('main.rabbitmq') }}">RabbitMQ</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link  btn btn-outline-primary mb-2" href="{{ url_for('main.questdb') }}">QuestDB</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link  btn btn-outline-primary mb-2" href="{{ url_for('main.rethinkdb') }}">RethinkDB</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <!-- Requirements пункт меню -->
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-outline-primary mb-2" href="{{ url_for('main.requirements') }}">Requirements</a>
+                    </li>
+                </ul>
+            </aside>
+
+            <!-- Центральная часть -->
+            <!-- <main class="col-md-9 bg-info text-white text-center p-4"> -->
+            <main class="col-md-10 main-content text-center">    
+                {% block content %}
+                {% endblock %}
+            </main>
+        </div>
+    </main>
+
+    <!-- Подвал -->
+    <footer class="footer  text-left">
+        <div class="container">
+            <span class="text-dark" id="version-info"></span>
+        </div>
+    </footer>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    {% block scripts %}
+    {% endblock %}
+
+</body>
+</html>

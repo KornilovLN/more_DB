@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2 class="header-title">Description of Application</h2>
+    <div class="about-content">
+        {% for line in description_text %}
+            {% if loop.first or loop.last %}
+                <p class="about-separator">{{ line }}</p>
+            {% elif 'author:' in line %}
+                <p class="about-author"><strong>{{ line }}</strong></p>
+            {% else %}
+                <p class="about-info">{{ line }}</p>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

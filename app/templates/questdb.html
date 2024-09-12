@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2 class="header-title">QuestDB</h2>
+    <div>
+        <h3>Terminal Output</h3>
+        <pre id="terminal-output">{{ terminal_output }}</pre>
+    </div>
+    <div class="graph-container">      
+            <img id="data-plot" src="{{ url_for('main.plot_png') }}" alt="Data Plot">        
+    </div>
+</div>
+
+
+<script>
+    function updateData() {
+        // Update terminal output
+        fetch("{{ url_for('main.terminal_output') }}")
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('terminal-output').innerText = data;
+            });
+
+        // Update plot
+        document.getElementById('data-plot').src = "{{ url_for('main.plot_png') }}" + "?t=" + new Date().getTime();
+    }
+
+    // Update data every 5 seconds
+    setInterval(updateData, 5000);
+</script>
+{% endblock %}
